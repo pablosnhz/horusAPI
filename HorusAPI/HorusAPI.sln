@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33530.505
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HorusAPI", "HorusAPI\HorusAPI.csproj", "{58AF9AC6-A355-4120-8987-A9D654B86634}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{58AF9AC6-A355-4120-8987-A9D654B86634}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58AF9AC6-A355-4120-8987-A9D654B86634}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58AF9AC6-A355-4120-8987-A9D654B86634}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58AF9AC6-A355-4120-8987-A9D654B86634}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C2AF132F-90AD-489B-B4F4-0D94F9DB67A9}
+	EndGlobalSection
+EndGlobal
