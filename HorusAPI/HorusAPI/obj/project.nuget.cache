@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "Y6i0lHDaMNjaqZ8Ld1mNc0zmV/Dz/HjYxYWU2F/ThHBVpl3uvjk2g0+6uwnOtKuMMObF5gb3ZEHaVH6dZ1xabw==",
+  "dgSpecHash": "aAC7onwKRM8UYVMrslTzK6oZFQkGQPaFuFvt3Z/DqsfMKJU0CfkzAgsmbkrhpNx2OOzc3RPw3y2S5R3EckSnZQ==",
   "success": true,
   "projectFilePath": "D:\\DescargasD\\proyectospersonales\\horusApi\\HorusAPI\\HorusAPI\\HorusAPI.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Cipper\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\Cipper\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Cipper\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\6.0.36\\microsoft.aspnetcore.jsonpatch.6.0.36.nupkg.sha512",
     "C:\\Users\\Cipper\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\6.0.36\\microsoft.aspnetcore.mvc.newtonsoftjson.6.0.36.nupkg.sha512",
