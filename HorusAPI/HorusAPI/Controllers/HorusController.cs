@@ -2,6 +2,7 @@
 using HorusAPI.Datos;
 using HorusAPI.Models;
 using HorusAPI.Models.Dto;
+using HorusAPI.Repositorios.IRepositorio;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -14,25 +15,40 @@ namespace HorusAPI.Controllers
     public class HorusController : ControllerBase
     {
         private readonly ILogger<HorusController> _logger;
-        private readonly ApplicationDbContext _db;
+        // private readonly ApplicationDbContext _db;
+        private readonly IHorusRepositorio _horusRepo;
         private readonly IMapper _mapper;
-        public HorusController(ILogger<HorusController> logger, ApplicationDbContext db, IMapper mapper)
+        protected APIResponse _response;
+
+        public HorusController(ILogger<HorusController> logger, IHorusRepositorio horusRepo, IMapper mapper)
         {
             _logger = logger;
-            _db = db;
+            _horusRepo = horusRepo;
             _mapper = mapper;
+            _response = new();
         }
 
 
         [HttpGet("GetHorus")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<IEnumerable<HorusDto>>> GetHorus()
+        public async Task<ActionResult<APIResponse>> GetHorus()
         {
-            _logger.LogInformation("Obtener los productos");
+            try
+            {
+                _logger.LogInformation("Obtener los productos");
 
-            IEnumerable<Horus> horusList = await _db.HorusDB.ToListAsync();
+                IEnumerable<Horus> horusList = await _horusRepo.ObtenerTodos();
 
-            return Ok(_mapper.Map<IEnumerable<HorusDto>>(horusList));
+                _response.Resultado = _mapper.Map<IEnumerable<HorusDto>>(horusList);
+                _response.StatusCode = System.Net.HttpStatusCode.OK;
+
+                return Ok(_response);
+            } catch (Exception ex) 
+            {
+                _response.IsExitoso = false;
+                _response.ErrorMessages = new List<string>() { ex.ToString() };
+            }
+            return _response;
         }
 
 
@@ -40,54 +56,77 @@ namespace HorusAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<HorusDto>> GetHorusPorId(int id)
+        public async Task<ActionResult<APIResponse>> GetHorusPorId(int id)
         {
-            if(id == 0)
+            try
             {
-                _logger.LogError("Error al traer el producto por id" + id);
-                return BadRequest();
-            }
-            //var horus = HorusStore.horusList.FirstOrDefault(v => v.Id == id);
-            var horus = await _db.HorusDB.FirstOrDefaultAsync(x => x.Id == id);
+                if (id == 0)
+                {
+                    _logger.LogError("Error al traer el producto por id" + id);
+                    _response.StatusCode = System.Net.HttpStatusCode.BadRequest;
+                    _response.IsExitoso = false;
+                    return BadRequest(_response);
+                }
+                //var horus = HorusStore.horusList.FirstOrDefault(v => v.Id == id);
+                var horus = await _horusRepo.Obtener(x => x.Id == id);
 
-            if(horus == null)
+                if (horus == null)
+                {
+                    _response.StatusCode = System.Net.HttpStatusCode.NotFound;
+                    _response.IsExitoso =false;
+                    return NotFound(_response);
+                }
+                _response.Resultado = _mapper.Map<HorusDto>(horus);
+                _response.StatusCode = System.Net.HttpStatusCode.OK;
+
+                return Ok(_response);
+            } catch (Exception ex)
             {
-                return NotFound();
+                _response.IsExitoso = false;
+                _response.ErrorMessages = new List<string>() {  ex.ToString() };
             }
-
-            return Ok(_mapper.Map<HorusDto>(horus));
+            return _response;
         }
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType (StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<HorusDto>> CrearProducto([FromBody] HorusCreateDto horusCreateProducto)
+        public async Task<ActionResult<APIResponse>> CrearProducto([FromBody] HorusCreateDto horusCreateProducto)
         {
-            if (!ModelState.IsValid) 
-            { 
-                return BadRequest(ModelState);
-            }
-
-            if(await _db.HorusDB.FirstOrDefaultAsync(v => v.Name.ToLower() ==
-            horusCreateProducto.Name.ToLower()) != null)
+            try
+            {
+                if (!ModelState.IsValid)
                 {
-                ModelState.AddModelError("NombreExiste", "El producto con ese nombre ya existe");
-                return BadRequest(ModelState);
+                    return BadRequest(ModelState);
                 }
 
-            if(horusCreateProducto == null)
-            {
-                return BadRequest(horusCreateProducto);
-            }
-            //horusProducto.Id = HorusStore.horusList.OrderByDescending(v => //v.Id).FirstOrDefault().Id + 1;
-            //HorusStore.horusList.Add(horusProducto);
-            Horus modelo = _mapper.Map<Horus>(horusCreateProducto);
-            
-            await _db.HorusDB.AddAsync(modelo);
-            await _db.SaveChangesAsync();
+                if (await _horusRepo.Obtener(v => v.Name.ToLower() ==
+                horusCreateProducto.Name.ToLower()) != null)
+                {
+                    ModelState.AddModelError("NombreExiste", "El producto con ese nombre ya existe");
+                    return BadRequest(ModelState);
+                }
 
-            return CreatedAtRoute("GetProductoHorus", new { id = modelo.Id }, modelo);
+                if (horusCreateProducto == null)
+                {
+                    return BadRequest(horusCreateProducto);
+                }
+                //horusProducto.Id = HorusStore.horusList.OrderByDescending(v => //v.Id).FirstOrDefault().Id + 1;
+                //HorusStore.horusList.Add(horusProducto);
+                Horus modelo = _mapper.Map<Horus>(horusCreateProducto);
+
+                await _horusRepo.Crear(modelo);
+                _response.Resultado = modelo;
+                _response.StatusCode = System.Net.HttpStatusCode.Created;
+
+                return CreatedAtRoute("GetProductoHorus", new { id = modelo.Id }, _response);
+            } catch (Exception ex)
+            {
+                _response.IsExitoso = false;
+                _response.ErrorMessages = new List<string> {ex.ToString()};
+            }
+            return _response;
         }
 
         [HttpDelete("{id:int}")]
@@ -96,20 +135,32 @@ namespace HorusAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> DeleteProducto(int id)
         {
-            if(id == 0)
+            try
             {
-                return BadRequest();
-            }
+                if (id == 0)
+                {
+                    _response.IsExitoso =false;
+                    _response.StatusCode = System.Net.HttpStatusCode.BadRequest;
+                    return BadRequest(_response);
+                }
 
-            var producto = await _db.HorusDB.FirstOrDefaultAsync(v => v.Id == id);
-            if(producto == null)
+                var producto = await _horusRepo.Obtener(v => v.Id == id);
+                if (producto == null)
+                {
+                    _response.IsExitoso = false;
+                    _response.StatusCode = System.Net.HttpStatusCode.NotFound;
+                    return NotFound(_response);
+                }
+                await _horusRepo.Remover(producto);
+
+                _response.StatusCode = System.Net.HttpStatusCode.NoContent;
+                return Ok(_response);
+            } catch (Exception ex)
             {
-                return NotFound();
+                _response.IsExitoso = false;
+                _response.ErrorMessages = new List<string>() {ex.ToString()};
             }
-            _db.HorusDB.Remove(producto);
-            await _db.SaveChangesAsync();
-
-            return NoContent();
+            return BadRequest(_response);
         }
 
         [HttpPut("{id:int}")]
@@ -120,7 +171,9 @@ namespace HorusAPI.Controllers
         {
             if (horusUpdateProducto == null || id != horusUpdateProducto.Id)
             {
-                return BadRequest(new { message = "El ID de la URL y el ID del producto no coinciden o el cuerpo está vacío." });
+                _response.IsExitoso=false;
+                _response.StatusCode = System.Net.HttpStatusCode.BadRequest;
+                return BadRequest(_response);
             }
 
             //var producto = HorusStore.horusList.FirstOrDefault(v => v.Id == id);
@@ -128,10 +181,12 @@ namespace HorusAPI.Controllers
             //producto.Description = horusProducto.Description;
             Horus modelo = _mapper.Map<Horus>(horusUpdateProducto);
 
-            _db.HorusDB.Update(modelo);
-            await _db.SaveChangesAsync();
+            await _horusRepo.Actualizar(modelo);
 
-            return NoContent();
+
+            _response.StatusCode=System.Net.HttpStatusCode.NoContent;
+
+            return Ok(_response);
         }
 
         [HttpPatch("{id:int}")]
@@ -144,7 +199,7 @@ namespace HorusAPI.Controllers
                 return BadRequest();
             }
 
-            var horus = await _db.HorusDB.FirstOrDefaultAsync(h => h.Id == id);
+            var horus = await _horusRepo.Obtener(h => h.Id == id, tracked: false);
             if (horus == null)
             {
                 return NotFound();
@@ -164,8 +219,7 @@ namespace HorusAPI.Controllers
 
             Horus modelo = _mapper.Map<Horus>(horusDto);
 
-            _db.HorusDB.Update(horus);
-            await _db.SaveChangesAsync();
+            _horusRepo.Actualizar(horus);
 
             return NoContent();
         }

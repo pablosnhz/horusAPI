@@ -1,5 +1,7 @@
 using HorusAPI;
 using HorusAPI.Datos;
+using HorusAPI.Repositorios;
+using HorusAPI.Repositorios.IRepositorio;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +19,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(option =>
 });
 
 builder.Services.AddAutoMapper(typeof(MappingConfig));
+
+builder.Services.AddScoped<IHorusRepositorio, HorusRepositorio>();
 
 var app = builder.Build();
 
