@@ -21,6 +21,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(option =>
 builder.Services.AddAutoMapper(typeof(MappingConfig));
 
 builder.Services.AddScoped<IHorusRepositorio, HorusRepositorio>();
+builder.Services.AddScoped<INumeroHorusRepositorio, NumeroHorusRepositorio>();
+
 
 var app = builder.Build();
 

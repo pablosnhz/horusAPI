@@ -13,6 +13,10 @@ namespace HorusAPI
 
             CreateMap<Horus, HorusCreateDto>().ReverseMap();
             CreateMap<Horus, HorusUpdateDto>().ReverseMap();
+
+            CreateMap<NumeroHorus, NumeroHorusDto>().ReverseMap();
+            CreateMap<NumeroHorus, HorusCreateDto>().ReverseMap();
+            CreateMap<NumeroHorus, HorusUpdateDto>().ReverseMap();
         }
     }
 }

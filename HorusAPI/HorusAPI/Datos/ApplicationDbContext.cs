@@ -11,6 +11,7 @@ namespace HorusAPI.Datos
             
         }
         public DbSet<Horus> HorusDB { get; set; }
+        public DbSet<NumeroHorus> NumeroHorusDB { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
