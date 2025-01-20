@@ -1,0 +1,42 @@
+<!-- carousel secundario -->
+<div class="w-full relative responsive swiper-container">
+  <div class="flex items-center justify-center swiper-wrapper">
+    <button aria-label="slide backward" class="absolute z-30 left-0 ml-8 focus:outline-none focus:bg-gray-400 focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 cursor-pointer swiper-button-prev" (click)="goPrev()">
+      <svg width="20" height="50" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7 1L1 7L7 13" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </button>
+    <div class="w-full h-full mx-auto overflow-x-hidden overflow-y-hidden">
+    <swiper-container slides-per-view="1" speed="500" loop="true"  id="slider" class="h-full flex lg:gap-8 md:gap-6 gap-14 items-center justify-start transition ease-out duration-700 swiper-slide">
+        <swiper-slide *ngFor="let merch of merchList" (click)="detailMerch(merch.id)" class="flex flex-shrink-0 relative w-full sm:w-auto card-image">
+          <img [src]="merch.image" alt="black chair and white table" class="object-cover object-center w-full" style="height: 30rem; padding: 80px;" />
+          <div class="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
+            <h2 class="lg:text-xl leading-4 text-base lg:leading-5 text-black">{{ merch.category }}</h2>
+            <h3 class="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-black">{{ merch.title }}</h3>
+            <div class="absolute bottom-0 pb-6">
+              <button class="hover-button" (click)="addCart(merch); $event.stopPropagation()">
+                <span class="text-white-500 font-bold underline">SHOP NOW</span>
+              </button>
+            </div>
+          </div>
+        </swiper-slide>
+    </swiper-container>
+
+      </div>
+
+    <button aria-label="slide forward" class="absolute z-30 right-0 mr-8 focus:outline-none focus:bg-gray-400 focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 swiper-button-next" (click)="goNext()">
+      <svg width="20" height="50" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1 1L7 7L1 13" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </button>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+

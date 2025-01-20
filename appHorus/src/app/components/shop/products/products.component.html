@@ -1,0 +1,64 @@
+<div class="imge pb-20">
+  <h1 class="mb-4 text-3xl md:text-4xl lg:text-5xl xl:text-4xl font-extrabold leading-none tracking-tight text-gray-900 dark:text-white">Discover Our Innovative Products</h1>
+  <p class="mb-6 text-base md:text-lg lg:text-xl xl:text-lg font-normal text-gray-500 sm:px-16 xl:px-48 dark:text-gray-100">Explore our range of cutting-edge products designed to enhance your life and solve everyday challenges.</p>
+  <a href="#" class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+    Shop Now
+    <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+    </svg>
+  </a>
+</div>
+
+
+<ng-container *ngIf="isLoading; else products">
+  <div class="flex justify-center">
+    <div class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]" role="status">
+      <span class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">Loading...</span>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #products>
+  <section id="Projects" class="w-fit mx-auto grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mb-5 grid-responsive" style="margin-top: 30px; margin-bottom: 100px">
+    <div *ngFor="let item of listaProductos; let i = index">
+      <div class="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
+        <div class="h-52 flex justify-center items-center">
+          <img [src]="item.image" alt="Product" class="object-contain h-full max-w-full" (click)="detailProduct(item.id)"/>
+        </div>
+          <div class="px-4 py-3 w-72">
+              <span class="text-gray-400 mr-3 uppercase text-xs">{{ item.category }}</span>
+              <p class="text-lg font-bold text-black truncate block capitalize">{{ item.title }}</p>
+              <div class="flex items-center">
+                  <p class="text-lg font-semibold text-black cursor-auto my-3">${{ item.price }}</p>
+                  <del>
+                      <p class="text-sm text-gray-600 cursor-auto ml-2">$199</p>
+                  </del>
+                  <div (click)="addCart(item)" class="ml-auto cursor-pointer"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                          fill="currentColor" class="bi bi-bag-plus" viewBox="0 0 16 16">
+                          <path fill-rule="evenodd"
+                              d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z" />
+                          <path
+                              d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z" />
+                      </svg>
+                    </div>
+              </div>
+          </div>
+  </div>
+</div>
+</section>
+
+<script src="https://storage.ko-fi.com/cdn/scripts/overlay-widget.js"></script>
+<script>
+  kofiWidgetOverlay.draw('mohamedghulam', {
+          'type': 'floating-chat',
+          'floating-chat.donateButton.text': 'Support me',
+          'floating-chat.donateButton.background-color': '#323842',
+          'floating-chat.donateButton.text-color': '#fff'
+      });
+</script>
+</ng-template>
+
+
+<div class="mb-5">
+<app-card-secondary></app-card-secondary>
+</div>

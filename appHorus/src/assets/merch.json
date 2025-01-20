@@ -1,0 +1,105 @@
+
+[
+  {
+    "id": 21,
+    "title": "Apple iPhone 14 Pro Max (512 Gb)",
+    "price": 1000.00,
+    "description": "Para el dia a dia",
+    "image": "https://pandashop.com.ar/wp-content/uploads/2023/10/apple-iphone-14-pro-max-512-gb---negro-espacial---usado.jpg",
+    "category": "Hogar"
+  },{
+    "id": 22,
+    "title": "Motorola Xt-2341 G14 6.5 128gb",
+    "price": 399.99,
+    "description": "Para el dia a dia",
+    "image": "https://http2.mlstatic.com/D_NQ_NP_899233-MLA72957699258_112023-O.webp",
+    "category": "Oficina/Hogar"
+  },{
+    "id": 23,
+    "title": "MOTOROLA Moto XT220",
+    "price": 89.99,
+    "description": "Para el dia a dia",
+    "image": "https://www.heavenimagenes.com/heavencommerce/0f0b49b9-7465-4399-a1a2-17a5aa644970/images/v2/MOTOROLA/6285_medium.jpg",
+    "category": "auricular"
+  },{
+    "id": 24,
+    "title": "SAMSUNG Galaxy A53",
+    "price": 399.99,
+    "description": "Color: negro",
+    "image": "https://previsoraarg.vtexassets.com/arquivos/ids/157088/97541a.jpg?v=637904578594200000",
+    "category": "celular"
+  },{
+    "id": 25,
+    "title": "Webcam",
+    "price": 49.99,
+    "description": "Uso de camara para stream, reuniones.. etc",
+    "image": "https://i.pinimg.com/474x/a1/63/2c/a1632ccb0ecc585bfac9b6489755ce3c.jpg",
+    "category": "webcam"
+  },{
+    "id": 26,
+    "title": "Playstation 5",
+    "price": 19.99,
+    "description": "Uso de camara para stream, reuniones.. etc",
+    "image": "https://www.smcyberzone.com/app/uploads/2023/05/PS5-A-1.png",
+    "category": "Consola"
+  },{
+    "id": 27,
+    "title": "Auriculares Gamer Logitech G",
+    "price": 19.99,
+    "description": "Uso de camara para stream, reuniones.. etc",
+    "image": "https://www.tamata.com/media/catalog/product/cache/d65899a294a8e7b1b602f108a6bde908/1/2/1200-12-17-10-10-2.jpg",
+    "category": "Auriculares"
+  },{
+    "id": 28,
+    "title": "Silla Gamer",
+    "price": 19.99,
+    "description": "Uso de camara para stream, reuniones.. etc",
+    "image": "https://i.pinimg.com/474x/5f/a5/61/5fa561495025e2583617e8e494012153.jpg",
+    "category": "Sillas"
+  },{
+    "id": 29,
+    "title": "Dell Laptop Inspiron Core i5",
+    "price": 19.99,
+    "description": "Uso de camara para stream, reuniones.. etc",
+    "image": "https://www.smcyberzone.com/_ipx/f_webp/https://www.smcyberzone.com/app/uploads/2023/05/Dell-Inspiron-7000-2.png",
+    "category": "Portatil"
+  },{
+    "id": 30,
+    "title": "Gabinete",
+    "price": 19.99,
+    "description": "Uso de camara para stream, reuniones.. etc",
+    "image": "https://www.gostore.uy/wp-content/uploads/2023/08/Gabinete-Shot-Gaming-1.jpeg",
+    "category": "Gabinete"
+  },{
+    "id": 31,
+    "title": "TUF GAMING H3",
+    "price": 19.99,
+    "description": "Uso de camara para stream, reuniones.. etc",
+    "image": "https://http2.mlstatic.com/D_NQ_NP_793997-MLA45170880083_032021-O.webp",
+    "category": "Auriculares"
+  },{
+    "id": 32,
+    "title": "Asus Rog Strix X670e-a Gaming Wifi",
+    "price": 19.99,
+    "description": "Uso de camara para stream, reuniones.. etc",
+    "image": "https://http2.mlstatic.com/D_NQ_NP_612495-MLM53028135046_122022-O.webp",
+    "category": "Placa madre"
+  },{
+    "id": 33,
+    "title": "ZOTAC Geforce RTX 3070 Graphics Card",
+    "price": 2219.99,
+    "description": "Uso de camara para stream, reuniones.. etc",
+    "image": "https://5.imimg.com/data5/SELLER/Default/2023/6/319472910/NL/HG/XN/191745951/zotac-geforce-rtx-3070-graphics-card-500x500.jpg",
+    "category": "Placa de video"
+  },{
+    "id": 34,
+    "title": "Playstation 2",
+    "price": 19.99,
+    "description": "Uso de camara para stream, reuniones.. etc",
+    "image": "https://www.smcyberzone.com/_ipx/f_webp/https://www.smcyberzone.com/app/uploads/2021/10/Playstation-2-Black.jpg",
+    "category": "Portatil"
+  }
+
+
+
+]

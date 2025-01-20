@@ -1,0 +1,52 @@
+/* buttonCard */
+.hover-button {
+  --color: black;
+  font-family: inherit;
+  display: inline-block;
+  width: 10em;
+  height: 2.6em;
+  line-height: 2.5em;
+  overflow: hidden;
+  z-index: 1;
+  color: var(--color);
+  position: relative;
+}
+
+.hover-button::before {
+  position: absolute;
+  content: "";
+  background: var(--color);
+  width: 250px;
+  height: 100px;
+  z-index: -1;
+}
+
+.hover-button:hover {
+  color: white;
+}
+
+.hover-button:before {
+  top: 100%;
+  left: 100%;
+  transition: .0s all;
+}
+
+.hover-button:hover::before {
+  top: -30px;
+  left: -30px;
+}
+
+.card-image {
+  max-width: 400px;
+  height: auto;
+}
+
+@media (max-width: 768px) {
+  .responsive {
+    position: relative;
+    top: -20px;
+  }
+  }
+
+
+

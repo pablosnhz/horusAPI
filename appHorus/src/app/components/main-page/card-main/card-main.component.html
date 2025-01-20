@@ -1,0 +1,40 @@
+<div class="w-full relative px-6 mt-20 size-box">
+  <p class="text-2xl font-bold mb-2 mt-8 lette-size pl-3">ARE YOU INTERESED IN ANY OF THESE PRODUCTS?</p>
+  <div class="flex items-center justify-center ">
+    <button aria-label="slide backward" class="absolute z-30 left-0 ml-8 focus:outline-none focus:bg-gray-400 focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 cursor-pointer" (click)="prev()">
+      <svg width="20" height="50" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7 1L1 7L7 13" stroke="red" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </button>
+    <div class="w-full h-full mx-auto overflow-x-hidden overflow-y-hidden">
+      <div id="sliderUno" class="h-full flex items-center justify-start transition ease-out duration-700">
+        <div *ngFor="let merch of listaMerch" (click)="detailCard(merch.id)" class="flex flex-col min-h-0 flex-shrink-0 relative w-full sm:w-auto">
+          <div class="bg-white shadow-lg overflow-hidden max-w-md w-full little-screen">
+            <img [src]="merch.image" alt="Mountain" class="w-full h-64 object-none" style="height: 30rem;">
+              <div class="p-6">
+                  <h2 class="text-2xl font-bold text-gray-800 mb-2">{{ merch.title }}</h2>
+                  <p class="text-1xl font-bold text-gray-700 mb-1">PRICE: {{ merch.price | currency }}</p>
+                  <p class="text-gray-600 leading-tight mb-4 letter">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eu sapien porttitor, blandit velit ac,
+                      vehicula elit. Nunc et ex at turpis rutrum viverra.
+                  </p>
+                  <div class="flex justify-between items-center">
+                      <div class="flex items-center">
+                        <button class="hover-button">
+                          <span class="text-white-500 font-bold underline" (click)="addCart(merch); $event.stopPropagation()">SHOP NOW</span>
+                        </button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button aria-label="slide forward" class="absolute z-30 right-0 mr-5 focus:outline-none focus:bg-gray-400 focus:ring-2 focus:ring-offset-2 focus:ring-gray-400" (click)="next()">
+      <svg width="20" height="50" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1 1L7 7L1 13" stroke="red" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </button>
+  </div>
+</div>
+

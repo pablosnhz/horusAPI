@@ -1,0 +1,117 @@
+<!-- component -->
+<div *ngIf="productDetails">
+<section class="text-gray-700 body-font overflow-hidden bg-white">
+  <div class="container px-5 py-24 mx-auto">
+    <div class="lg:w-4/5 lg:pl-24 mx-auto flex flex-wrap">
+      <img alt="ecommerce" class="lg:w-1/3 sm:w-1/3 w-full object-cover object-center rounded border border-gray-200" [src]="productDetails.image">
+      <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
+        <h2 class="text-sm title-font text-gray-500 tracking-widest">{{ productDetails.category }}</h2>
+        <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">{{ productDetails.title }}</h1>
+        <div class="flex mb-4">
+          <span class="flex items-center">
+            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-red-500" viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+            </svg>
+            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-red-500" viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+            </svg>
+            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-red-500" viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+            </svg>
+            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-red-500" viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+            </svg>
+            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-red-500" viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+            </svg>
+            <span class="text-gray-600 ml-3">4 Reviews</span>
+          </span>
+        </div>
+        <p class="leading-relaxed">Helvetica tattooed schlitz, irony kinfolk art party poke normcore leggings. Lomo before they sold out brunch, prism health goth beard small batch pickled. Church-key brooklyn letterpress, disrupt activated charcoal banjo fashion axe af bushwick raw denim dreamcatcher tumeric.</p>
+
+        <div class="flex pt-8">
+          <span class="title-font font-medium text-2xl text-gray-900">{{ productDetails.price | currency }}</span>
+          <button routerLink="/home" class="flex ml-auto text-white bg-gray-600 border-0 py-2 px-4 sm:px-6 font-semibold focus:outline-none hover:bg-gray-500 rounded-xl small-button">Back</button>
+          <button (click)="addCart(productDetails)" class="flex ml-auto text-white bg-blue-600 border-0 py-2 px-4 sm:px-6 font-semibold focus:outline-none hover:bg-blue-500 rounded-xl small-button">Add cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+
+<div *ngIf="detailProducts">
+  <section class="text-gray-700 body-font overflow-hidden bg-white">
+    <div class="container px-5 py-24 mx-auto">
+      <div class="lg:w-4/5 lg:pl-24 mx-auto flex flex-wrap">
+        <img alt="ecommerce" class="lg:w-1/3 sm:w-1/3 w-full object-cover object-center rounded border border-gray-200" [src]="detailProducts.image">
+        <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
+          <h2 class="text-sm title-font text-gray-500 tracking-widest">{{ detailProducts.category }}</h2>
+          <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">{{ detailProducts.title }}</h1>
+          <div class="flex mb-4">
+            <span class="flex items-center">
+              <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-red-500" viewBox="0 0 24 24">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+              </svg>
+              <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-red-500" viewBox="0 0 24 24">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+              </svg>
+              <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-red-500" viewBox="0 0 24 24">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+              </svg>
+              <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-red-500" viewBox="0 0 24 24">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+              </svg>
+              <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-red-500" viewBox="0 0 24 24">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+              </svg>
+              <span class="text-gray-600 ml-3">4 Reviews</span>
+            </span>
+          </div>
+          <p class="leading-relaxed">Helvetica tattooed schlitz, irony kinfolk art party poke normcore leggings. Lomo before they sold out brunch, prism health goth beard small batch pickled. Church-key brooklyn letterpress, disrupt activated charcoal banjo fashion axe af bushwick raw denim dreamcatcher tumeric.</p>
+
+          <div class="flex pt-8">
+            <span class="title-font font-medium text-2xl text-gray-900">{{ detailProducts.price | currency }}</span>
+            <button routerLink="/home" class="flex ml-auto text-white bg-gray-600 border-0 py-2 px-6 font-semibold focus:outline-none hover:bg-gray-500 rounded-xl">Back</button>
+            <button (click)="addCart(detailProducts)" class="flex ml-auto text-white bg-blue-600 border-0 py-2 px-6 font-semibold focus:outline-none hover:bg-blue-500 rounded-xl">Add Cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  </div>
+
+
+<!-- cart message -->
+<div *ngIf="mensajeExito && ( productDetails || detailProducts )" class="bg-green-200 text-green-800 mb-4 rounded">
+  <div class="fixed z-10 inset-0 overflow-y-auto">
+    <div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+        <div class="fixed inset-0 transition-opacity">
+            <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+        </div>
+        <span class="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
+        <div
+            class="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
+            <div class="sm:flex sm:items-start">
+                <div
+                    class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10">
+                    <svg class="h-6 w-6 text-green-600" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                </div>
+                <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900">
+                        ADDED TO CART!
+                    </h3>
+                    <div class="mt-2">
+                        <p class="text-sm leading-5 text-gray-500">
+                          Added to cart {{ productDetails?.title || detailProducts?.title  }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

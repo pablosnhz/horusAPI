@@ -1,0 +1,6 @@
+@media (max-width: 499px) {
+  .small-button {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+}

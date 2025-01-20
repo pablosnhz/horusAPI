@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "aAC7onwKRM8UYVMrslTzK6oZFQkGQPaFuFvt3Z/DqsfMKJU0CfkzAgsmbkrhpNx2OOzc3RPw3y2S5R3EckSnZQ==",
+  "dgSpecHash": "N7XYnRi1iHoUSvlkdd42SugRrq3oqmZL0rhJEx0f5U+gh0WWtF3PdRcVVjIQ44tluAL/y7s++BJUFhescBzZnw==",
   "success": true,
   "projectFilePath": "D:\\DescargasD\\proyectospersonales\\horusApi\\HorusAPI\\HorusAPI\\HorusAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Cipper\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\Cipper\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
+    "C:\\Users\\Cipper\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.36\\microsoft.aspnetcore.authentication.jwtbearer.6.0.36.nupkg.sha512",
     "C:\\Users\\Cipper\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\6.0.36\\microsoft.aspnetcore.jsonpatch.6.0.36.nupkg.sha512",
     "C:\\Users\\Cipper\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\6.0.36\\microsoft.aspnetcore.mvc.newtonsoftjson.6.0.36.nupkg.sha512",
     "C:\\Users\\Cipper\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.5\\microsoft.aspnetcore.openapi.7.0.5.nupkg.sha512",
