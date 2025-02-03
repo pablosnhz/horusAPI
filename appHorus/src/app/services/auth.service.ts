@@ -24,9 +24,9 @@ export class AuthService {
 
         // console.log(`response login: ${JSON.stringify(response)}`);
         const user = { email, token: response.token, userName: response.userName };
-        localStorage.setItem('user', JSON.stringify(user));
+        // localStorage.setItem('user', JSON.stringify(user));
         this.$user.set(user);
-        localStorage.setItem('token', response.token);
+        sessionStorage.setItem('token', response.token);
       })
     )
   }
@@ -37,9 +37,9 @@ export class AuthService {
 
   logout() {
     this.$user.set(null);
-    localStorage.removeItem('user');
-    localStorage.removeItem('token');
-    localStorage.removeItem('userName');
+    sessionStorage.removeItem('cart');
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('userName');
   }
 
   getUser(){
@@ -61,11 +61,11 @@ export class AuthService {
   }
 
   getToken(): string | null {
-    return localStorage.getItem('token');
+    return sessionStorage.getItem('token');
   }
 
   restoreUser() {
-    const token = localStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     if(token) {
       const user = { email: '', token };
       this.$user.set(user);

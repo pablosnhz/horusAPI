@@ -64,11 +64,11 @@ export class DetailsComponent implements OnInit{
 
   // detalles service
   detailsProducts(productsId: number){
-    console.log('producto', this.productDetails?.title);
+    // console.log('producto', this.productDetails?.title);
     this.productService.apiProductDetail(productsId)
     .subscribe(
       (product) => {
-        console.log('detalle', this.detailProducts);
+        // console.log(`llegado producto ${product.title}`);
         this.detailProducts = product;
 
       })

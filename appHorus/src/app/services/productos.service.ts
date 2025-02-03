@@ -14,10 +14,9 @@ export class ProductsService {
   private readonly destroy$: AutoDestroyService = inject(AutoDestroyService);
 
   constructor(private http:HttpClient, private route: Router) {
-    const storedCart = localStorage.getItem('cart')
+    const storedCart = sessionStorage.getItem('cart')
     if(storedCart){
       this.cartProducts = JSON.parse(storedCart)
-
       this.updateCart();
     }
   }
@@ -65,22 +64,19 @@ export class ProductsService {
       .pipe(
         map(response => {
           const products = response.value;
-          console.log('datos de la api:', products);
+          // console.log('datos de la api:', products);
           if (!products || products.length === 0) {
             throw new Error('array vacio');
           }
           const product = products.find(item => {
             return +item.productoId === +productsId;
           });
-          console.log('producto encontrado:', product);
+          // console.log('producto encontrado:', product);
           if (product) {
             return product;
           } else {
             throw new Error(`producto no encontrado ${productsId}`);
           }
-        }),
-        catchError(error => {
-          return throwError(() => 'busqueda no encontrada');
         }),
         takeUntil(this.destroy$)
       );
@@ -105,7 +101,7 @@ export class ProductsService {
   updateCart(){
     this._productsBsubject.next([...this.cartProducts]);
     this.totalProductsInCart = this.cartProducts.reduce((total, item) => total + item.quantity, 0)
-    localStorage.setItem('cart', JSON.stringify(this.cartProducts));
+    sessionStorage.setItem('cart', JSON.stringify(this.cartProducts));
   }
 
 
@@ -135,25 +131,32 @@ export class ProductsService {
     this.productos().pipe(
       takeUntil(this.destroy$),
       map(products => {
-        console.log('Productos recibidos:', products);
+        // console.log('Productos recibidos:', products);
         const filteredProducts = products.filter(product =>
           product.title.toLowerCase().normalize("NFD").replace(/\s+/g, ' ').trim()
             .includes(title.toLowerCase().normalize("NFD").replace(/\s+/g, ' ').trim())
         );
-        console.log('Productos filtrados:', filteredProducts);
+
+        // console.log('Productos filtrados:', filteredProducts);
         return filteredProducts;
       })
-    ).subscribe(
-      searchResults => {
+    ).subscribe({
+      next: (searchResults) => {
+        // console.log('Resultado después de la suscripción:', searchResults);
+
         this.searchResultsSubject.next(searchResults);
-        if(searchResults.length > 0){
-          this.navigateDetails(searchResults[0].title)
+
+        if (searchResults.length > 0) {
+          this.navigateDetails(searchResults[0].title);
         }
       },
-      error => {
-        console.error('Error para encontrar los resultados', error)
+      error: (err) => {
+        // console.error('Error para encontrar los resultados', err);
+      },
+      complete: () => {
+        // console.log('La suscripción se completó');
       }
-    )
+    });
   }
 
   navigateDetails(title: string): void {

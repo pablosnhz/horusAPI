@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
 
       this.authService.login(email, password).subscribe(response => {
         if(response){
-          localStorage.setItem('token', (response as any).token);
+          sessionStorage.setItem('token', (response as any).token);
           this.route.navigate(['/']);
         }
         // console.log('Login Response:', response);

@@ -84,35 +84,6 @@ namespace apiHorus.Controllers
             return Ok(new { userName = user.Name, email = user.Email, role = roleName }); 
         }
 
-        [HttpGet("roluser")]
-        public IActionResult GetRolUser()
-        {
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-
-            if (string.IsNullOrEmpty(userId))
-            {
-                return Unauthorized();
-            }
-
-            var user = _dbHoruscontext.Usuarios.FirstOrDefault(u => u.UserId == u.UserId);
-
-            if (user == null)
-            {
-                return NotFound("usuario no encontrado");
-            }
-
-            // Buscar el rol asociado al usuario
-            var role = _dbHoruscontext.Roles.FirstOrDefault(r => r.RoleId == user.RoleId);
-
-            if (role == null)
-            {
-                return NotFound("rol no encontrado");
-            }
-
-            return Ok(new { roleName = role.RoleName });
-        }
-
-
         //public IActionResult Index()
         //{
         //  return View();
