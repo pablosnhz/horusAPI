@@ -8,9 +8,9 @@
     </button>
     <div class="w-full h-full mx-auto overflow-x-hidden overflow-y-hidden">
       <div id="sliderUno" class="h-full flex items-center justify-start transition ease-out duration-700">
-        <div *ngFor="let merch of listaMerch" (click)="detailCard(merch.id)" class="flex flex-col min-h-0 flex-shrink-0 relative w-full sm:w-auto">
+        <div *ngFor="let merch of listaMerch" (click)="detailCard(merch.productoId)" class="flex flex-col min-h-0 flex-shrink-0 relative w-full sm:w-auto">
           <div class="bg-white shadow-lg overflow-hidden max-w-md w-full little-screen">
-            <img [src]="merch.image" alt="Mountain" class="w-full h-64 object-none" style="height: 30rem;">
+            <img [src]="merch.imageUrl" alt="Mountain" class="w-full h-64 object-none" style="height: 30rem;">
               <div class="p-6">
                   <h2 class="text-2xl font-bold text-gray-800 mb-2">{{ merch.title }}</h2>
                   <p class="text-1xl font-bold text-gray-700 mb-1">PRICE: {{ merch.price | currency }}</p>

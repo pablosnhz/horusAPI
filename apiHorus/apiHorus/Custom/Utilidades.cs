@@ -4,7 +4,6 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using apiHorus.Models;
 
 namespace apiHorus.Custom
 {
@@ -33,17 +32,16 @@ namespace apiHorus.Custom
 
         public string generarJWT(Usuario modelo)
         {
-            //informacion user para token
             var userClaims = new[]
             {
                 new Claim(ClaimTypes.NameIdentifier, modelo.UserId.ToString()),
-                new Claim(ClaimTypes.Email, modelo.Email!)
+                new Claim(ClaimTypes.Email, modelo.Email!),
+                new Claim(ClaimTypes.Role, modelo.RoleId == 1 ? "admin" : "usuario")
             };
             var securityKey = new SymmetricSecurityKey
                 (Encoding.UTF8.GetBytes(_configuration["Jwt:key"]!));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature);
 
-            // detail token
             var jwtConfig = new JwtSecurityToken(
                     claims: userClaims,
                     expires:DateTime.UtcNow.AddMinutes(10),

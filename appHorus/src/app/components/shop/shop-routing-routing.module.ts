@@ -4,16 +4,18 @@ import { MainPageComponent } from '../main-page/main-page.component';
 import { DetailsComponent } from './details/details.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { ProductsComponent } from './products/products.component';
+import { authGuard } from 'src/app/core/guards/auth.guard';
 
 export const WithLazy: Routes = [
   {
     path: '', component: MainPageComponent
   },
   {
-    path: 'details/:id', component: DetailsComponent
+    path: 'details/:productoId', component: DetailsComponent
   },
   {
-    path: 'shopping', component: ShoppingCartComponent
+    path: 'shopping', component: ShoppingCartComponent,
+    canActivate: [authGuard]
   },
   {
     path: 'shop', component: ProductsComponent

@@ -1,0 +1,112 @@
+<section class="shadow-lg font-poppins dark:bg-white sticky top-0 lg:py-0">
+  <div class="max-w-6xl px-3 mx-auto">
+    <div class="relative flex items-center justify-between">
+      <!-- Botón en la izquierda -->
+      <div class="flex items-center gap-2">
+        <div class="lg:hidden">
+          <button class="flex items-center mt-0 px-2 py-2 text-blue-600 border-none rounded dark:text-black navbar-burger hover:text-blue-800 hover:border-blue-300 lg:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+            </svg>
+          </button>
+        </div>
+        <div class="title-center ">
+          <a routerLink="/" class="flex items-center">
+            <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-black">HORUS</span>
+          </a>
+        </div>
+      </div>
+      <div class=" lg:block">
+        <div class="group lg:gap-5 gap-1 pr-4 flex items-center">
+
+          <!-- CARRITO -->
+          <div class="bg-gray-100 mb-4 cursor-pointer bg-white" routerLink="/shopping">
+            <div class="relative py-2">
+
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="file: mt-4 h-6 w-6">
+              <!-- <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" /> -->
+            </svg>
+          </div>
+        </div>
+        <div class="group lg:gap-3 gap-1 pr-4 flex items-center">
+          <p *ngIf="userNames$();" class="text-sm font-medium text-gray-900 hover:text-gray-600">Bienvenido {{  userNames$().userName }}</p>
+          <a>
+            <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" class="w-8 h-8" alt="">
+          </a>
+        </div>
+        <div class="group lg:gap-3 gap-1 pr-4 flex items-center">
+          <button (click)="logout()">
+            <!-- <img src="" class="w-8 h-8" alt=""> -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2">
+              <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2"></path>
+              <path d="M9 12h12l-3 -3"></path>
+              <path d="M18 15l3 -3"></path>
+            </svg>
+          </button>
+        </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="bg-gray-100 flex justify-center items-center"> -->
+
+
+
+    <!-- MOBILE -->
+    <div class="absolute inset-0 z-10 h-screen p-3 text-gray-400 duration-500 transform bg-blue-50 dark:bg-gray-800 w-80 lg:hidden lg:transform-none lg:relative">
+      <div class="flex justify-between">
+        <a class="p-2 text-2xl font-bold text-gray-700 dark:text-white" href="#">HORUS</a>
+
+      </div>
+      <ul class="px-4 text-left mt-7">
+        <li class="pb-3"><a href="" class="text-sm text-gray-700 hover:text-blue-400 dark:text-gray-100">Home</a></li>
+        <li class="pb-3"><a href="" class="text-sm text-gray-700 hover:text-blue-400 dark:text-gray-400">About us</a></li>
+        <li class="pb-3"><a href="" class="text-sm text-gray-700 hover:text-blue-400 dark:text-gray-400">Features</a></li>
+        <li class="pb-3"><a href="" class="text-sm text-gray-700 hover:text-blue-400 dark:text-gray-400" routerLink="/shop">OUTLET </a></li>
+      </ul>
+      <div class="block mt-5 lg:hidden">
+        <a routerLink="/auth/login" class="inline-block w-full px-4 py-3 mb-4 mr-2 text-xs font-semibold leading-none text-center text-blue-600 border border-blue-400 rounded dark:hover:text-blue-300 dark:text-gray-400 dark:border-gray-400 hover:text-blue-700 hover:border-blue-300">Log In</a>
+        <a routerLink="/auth/register" class="inline-block w-full px-4 py-3 mr-2 text-xs font-semibold leading-none text-center text-gray-100 bg-blue-600 rounded dark:hover:bg-blue-400 dark:bg-blue-300 dark:text-gray-700 hover:bg-blue-700">Register</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- two columns -->
+
+<div *ngIf="userNames$()" class="max-w-6xl px-3 mx-auto mt-4 flex justify-between">
+  <h1 class="text-5xl">Bienvenido {{  userNames$().userName }}</h1>
+  <div *ngIf="userNames$().role == 'admin'">
+    <p class="text-red-600">Rol: {{  userNames$().role }}</p>
+  </div>
+</div>
+
+<div class="max-w-6xl px-4 mx-auto mt-4 flex">
+  <div class="w-1/5">
+    <h1 class="text-3xl">Menu</h1>
+    <div class="flex flex-col mt-4">
+      <a
+      *ngIf="userNames$()?.role == 'admin'"
+      [routerLink]="['/auth/profile']"
+      routerLinkActive="text-gray-900 underline underline-offset-7"
+      class="inline-block rounded-lg text-md font-medium hover:underline hover:underline-offset-7 text-gray-900"
+      >Products</a>
+      <a href=""
+      routerLinkActive="text-gray-900 underline underline-offset-7"
+      class="inline-block rounded-lg text-md font-medium hover:underline hover:underline-offset-7 text-gray-900"
+      >Invoices</a>
+      <a href=""
+      routerLinkActive="text-gray-900 underline underline-offset-7"
+      class="inline-block rounded-lg text-md font-medium hover:underline hover:underline-offset-7 text-gray-900"
+      >Projects</a>
+      <a href=""
+      routerLinkActive="text-gray-900 underline underline-offset-7"
+      class="inline-block rounded-lg text-md font-medium hover:underline hover:underline-offset-7 text-gray-900"
+      >Settings</a>
+    </div>
+  </div>
+  <div class="w-5/6 mt-20">
+    <router-outlet></router-outlet>
+  </div>
+</div>

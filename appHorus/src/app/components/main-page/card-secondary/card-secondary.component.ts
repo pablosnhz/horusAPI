@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { IMerch } from 'src/app/interface/merch';
+import { IProducts } from 'src/app/interface/products';
+import { AuthService } from 'src/app/services/auth.service';
 import { ProductsService } from 'src/app/services/productos.service';
 
 import { register } from 'swiper/element/bundle';
@@ -15,9 +16,9 @@ export class CardSecondaryComponent implements OnInit {
 
 slider: any;
 defaultTransform: any;
-merchList: IMerch[] = [];
+merchList: IProducts[] = [];
 
-constructor(private route: Router, private productsService: ProductsService){}
+constructor(private route: Router, private productsService: ProductsService, private auth: AuthService){}
 
 ngOnInit(): void {
   this.slider = document.getElementById("slider");
@@ -26,13 +27,11 @@ ngOnInit(): void {
   this.merchCard();
   }
 
-
-
 merchCard(){
   this.productsService.merch()
   .subscribe((data) => {
     if(Array.isArray(data))
-    this.merchList = data.slice(5, 15)
+    this.merchList = data.slice(22, 30)
   })
 }
 
@@ -40,8 +39,12 @@ detailMerch(productId: number){
     this.route.navigate(['/details', productId]);
   }
 
-addCart(product: IMerch) {
+addCart(product: IProducts) {
+  if(this.auth.$user()) {
     this.productsService.addProducts(product, 0);
+    } else {
+      this.route.navigate(['auth/login']);
+    }
   }
 
 

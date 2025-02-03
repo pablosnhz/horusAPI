@@ -1,0 +1,256 @@
+<ng-container *ngIf="userNames$()?.role == 'admin'">
+  <div class="w-full flex justify-between items-center mb-3 mt-1 pl-3">
+    <div>
+      <h3 class="text-lg font-semibold text-slate-800">List of products</h3>
+      <p class="text-slate-500">Here is a list of all products.</p>
+    </div>
+    <div class="ml-3">
+      <div class="w-full max-w-sm min-w-[200px] relative">
+        <div class="relative">
+            <input
+            [(ngModel)]="searchProduct"
+            (keyup)="searchFilterProducts()"
+            class="bg-white w-full pr-11 h-10 pl-3 py-2 bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded transition duration-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md"
+            placeholder="Search product..."
+            />
+            <button
+            class="absolute h-8 w-8 right-1 top-1 my-auto px-2 flex items-center bg-white rounded "
+            type="button"
+            >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-8 h-8 text-slate-600">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <button (click)="openModal()">
+      <img src="https://img.icons8.com/?size=100&id=102544&format=png&color=000000" class="w-8 h-8">
+    </button>
+  </div>
+
+  <div class="relative flex flex-col w-full overflow-scroll text-gray-700 bg-white shadow-md rounded-lg bg-clip-border">
+  <table class="w-full text-left table-auto min-w-max">
+    <thead>
+      <tr>
+        <th class="p-4 border-b border-slate-200 bg-slate-50">
+          <p class="text-sm font-normal leading-none text-slate-500">
+            Action
+          </p>
+        </th>
+        <th class="p-4 border-b border-slate-200 bg-slate-50">
+          <p class="text-sm font-normal leading-none text-slate-500">
+            ProductoId
+          </p>
+        </th>
+        <th class="p-4 border-b border-slate-200 bg-slate-50">
+          <p class="text-sm font-normal leading-none text-slate-500">
+            Title
+          </p>
+        </th>
+        <th class="p-4 border-b border-slate-200 bg-slate-50">
+          <p class="text-sm font-normal leading-none text-slate-500">
+            Price
+          </p>
+        </th>
+        <th class="p-4 border-b border-slate-200 bg-slate-50">
+          <p class="text-sm font-normal leading-none text-slate-500">
+            PrecioAnterior
+          </p>
+        </th>
+        <th class="p-4 border-b border-slate-200 bg-slate-50">
+          <p class="text-sm font-normal leading-none text-slate-500">
+            Description
+          </p>
+        </th>
+        <th class="p-4 border-b border-slate-200 bg-slate-50">
+          <p class="text-sm font-normal leading-none text-slate-500">
+            ImageUrl
+          </p>
+        </th>
+        <th class="p-4 border-b border-slate-200 bg-slate-50">
+          <p class="text-sm font-normal leading-none text-slate-500">
+            Categoria
+          </p>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of products" class="hover:bg-slate-50 border-b border-slate-200">
+
+        <td class="p-4 py-5 gap-4 flex">
+          <button class="text-sm text-slate-500" (click)="deleteProduct(item.productoId)">
+            <img src="https://img.icons8.com/?size=100&id=63688&format=png&color=000000" class="w-8 h-8">
+          </button>
+
+
+          <button (click)="openCreateModal( item)" class="block text-black bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+            <img src="https://img.icons8.com/?size=100&id=H5dKJanZkZNk&format=png&color=000000" class="w-8 h-8">
+          </button>
+
+        </td>
+        <td class="p-4 py-5">
+          <p class="block font-semibold text-sm text-slate-800">{{ item.productoId }}</p>
+        </td>
+        <td class="p-4 py-5">
+          <p class="text-sm text-slate-500">{{ item.title }}</p>
+        </td>
+        <td class="p-4 py-5">
+          <p class="text-sm text-slate-500">{{ item.price }}</p>
+        </td>
+        <td class="p-4 py-5">
+          <p class="text-sm text-slate-500">{{ item.priceAnterior }}</p>
+        </td>
+        <td class="p-4 py-5">
+          <p class="text-sm text-slate-500">{{ item.description }}</p>
+        </td>
+        <td class="p-4 py-5">
+          <p class="text-sm text-slate-500">{{ item.imageUrl }}</p>
+        </td>
+        <td class="p-4 py-5">
+          <p class="text-sm text-slate-500">{{ item.categoria }}</p>
+        </td>
+
+      </tr>
+
+    </tbody>
+  </table>
+
+  <div class="flex justify-between items-center px-4 py-3">
+    <div class="text-sm text-slate-500">
+      Showing <b>{{ (page - 1) * pageSize + 1 }} - {{ this.math().min(page * pageSize, totalProducts) }}</b> of {{ totalProducts }}
+    </div>
+    <div class="flex space-x-1">
+      <button (click)="changePage(page - 1)"
+        [disabled]="page === 1">
+        Prev
+      </button>
+
+      <button *ngFor="let p of [].constructor(this.math().ceil(totalProducts / pageSize)); let i = index"
+        (click)="changePage(i + 1)"
+        [class.bg-slate-800]="page === i + 1"
+        [class.text-white]="page === i + 1"
+        [class.text-slate-500]="page !== i + 1"
+        class="w-8 h-8 flex items-center justify-center rounded-full">
+        {{ i + 1 }}
+      </button>
+
+      <button (click)="changePage(page + 1)"
+        [disabled]="page >= this.math().ceil(totalProducts / pageSize)">
+        Next
+      </button>
+
+    </div>
+  </div>
+
+  </div>
+
+
+
+
+
+  <div *ngIf="isModalOpen" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
+    <div class="relative p-4 w-full max-w-2xl bg-white rounded-lg shadow dark:bg-gray-800">
+
+        <div class="flex justify-between items-center pb-4 mb-4 rounded-t border-b dark:border-gray-600">
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                Add Product
+            </h3>
+            <button (click)="closeModal()" class="text-gray-400 hover:bg-gray-200 rounded-lg text-sm p-1.5 dark:hover:bg-gray-600">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                </svg>
+            </button>
+        </div>
+
+        <form [formGroup]="createProductForm" (ngSubmit)="addProduct()">
+            <div class="grid gap-4 mb-4 sm:grid-cols-2">
+                <div>
+                    <label for="title" class="block text-sm font-medium text-gray-900 dark:text-white">Title</label>
+                    <input type="text" id="title" formControlName="title" class="bg-gray-50 border text-gray-900 rounded-lg w-full p-2.5 dark:bg-gray-700 dark:text-white" placeholder="Name product">
+                </div>
+                <div>
+                    <label for="price" class="block text-sm font-medium text-gray-900 dark:text-white">Price</label>
+                    <input type="number" id="price" formControlName="price" class="bg-gray-50 border text-gray-900 rounded-lg w-full p-2.5 dark:bg-gray-700 dark:text-white" placeholder="Price">
+                </div>
+                <div>
+                    <label for="priceAnterior" class="block text-sm font-medium text-gray-900 dark:text-white">Old Price</label>
+                    <input type="number" id="priceAnterior" formControlName="priceAnterior" class="bg-gray-50 border text-gray-900 rounded-lg w-full p-2.5 dark:bg-gray-700 dark:text-white" placeholder="Old Price">
+                </div>
+                <div class="sm:col-span-2">
+                    <label for="description" class="block text-sm font-medium text-gray-900 dark:text-white">Description</label>
+                    <textarea id="description" formControlName="description" rows="4" class="w-full p-2.5 text-gray-900 bg-gray-50 rounded-lg border dark:bg-gray-700 dark:text-white" placeholder="Write product description"></textarea>
+                </div>
+                <div>
+                  <label for="imageUrl" class="block text-sm font-medium text-gray-900 dark:text-white">Imagen</label>
+                  <input type="text" id="imageUrl" formControlName="imageUrl" class="bg-gray-50 border text-gray-900 rounded-lg w-full p-2.5 dark:bg-gray-700 dark:text-white" placeholder="Url">
+                </div>
+                <div>
+                  <label for="categoria" class="block text-sm font-medium text-gray-900 dark:text-white">Categoria</label>
+                  <input type="text" id="categoria" formControlName="categoria" class="bg-gray-50 border text-gray-900 rounded-lg w-full p-2.5 dark:bg-gray-700 dark:text-white" placeholder="Category">
+                </div>
+            </div>
+            <button type="submit" class="text-white bg-primary-700 hover:bg-primary-800 rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700">
+                Save product
+            </button>
+        </form>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+  <div *ngIf="isOpenCreateModal" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
+    <div class="relative p-4 w-full max-w-2xl bg-white rounded-lg shadow dark:bg-gray-800">
+
+        <div class="flex justify-between items-center pb-4 mb-4 rounded-t border-b dark:border-gray-600">
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                Update Product
+            </h3>
+            <button (click)="closeCreateModal()" class="text-gray-400 hover:bg-gray-200 rounded-lg text-sm p-1.5 dark:hover:bg-gray-600">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                </svg>
+            </button>
+        </div>
+
+        <form [formGroup]="updateProductForm" (ngSubmit)="updateProduct($event)">
+            <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+                <div>
+                    <label for="title" class="block text-sm font-medium text-gray-900 dark:text-white">Title</label>
+                    <input type="text" id="title" formControlName="title" class="bg-gray-50 border text-gray-900 rounded-lg w-full p-2.5 dark:bg-gray-700 dark:text-white" placeholder="Name product">
+                </div>
+                <div>
+                    <label for="price" class="block text-sm font-medium text-gray-900 dark:text-white">Price</label>
+                    <input type="number" id="price" formControlName="price" class="bg-gray-50 border text-gray-900 rounded-lg w-full p-2.5 dark:bg-gray-700 dark:text-white" placeholder="Price">
+                </div>
+                <div>
+                  <label for="priceAnterior" class="block text-sm font-medium text-gray-900 dark:text-white">Old Price</label>
+                  <input type="number" id="priceAnterior" formControlName="priceAnterior" class="bg-gray-50 border text-gray-900 rounded-lg w-full p-2.5 dark:bg-gray-700 dark:text-white" placeholder="Old Price">
+                </div>
+                <div class="sm:col-span-2">
+                    <label for="description" class="block text-sm font-medium text-gray-900 dark:text-white">Description</label>
+                    <input type="text" id="description" formControlName="description" class="bg-gray-50 border text-gray-900 rounded-lg w-full p-2.5 dark:bg-gray-700 dark:text-white" placeholder="Write product description">
+                </div>
+                <div>
+                  <label for="imageUrl" class="block text-sm font-medium text-gray-900 dark:text-white">Imagen</label>
+                  <input type="text" id="imageUrl" formControlName="imageUrl" class="bg-gray-50 border text-gray-900 rounded-lg w-full p-2.5 dark:bg-gray-700 dark:text-white" placeholder="Url">
+                </div>
+                <div>
+                  <label for="categoria" class="block text-sm font-medium text-gray-900 dark:text-white">Categoria</label>
+                  <input type="text" id="categoria" formControlName="categoria" class="bg-gray-50 border text-gray-900 rounded-lg w-full p-2.5 dark:bg-gray-700 dark:text-white" placeholder="Category">
+                </div>
+            </div>
+            <button type="submit" class="text-white bg-primary-700 hover:bg-primary-800 rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700">
+                Update product
+            </button>
+        </form>
+    </div>
+  </div>
+
+</ng-container>
+

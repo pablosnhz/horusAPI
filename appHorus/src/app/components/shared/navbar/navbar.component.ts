@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, forkJoin, map } from 'rxjs';
-import { IMerch } from 'src/app/interface/merch';
 import { IProducts } from 'src/app/interface/products';
+import { AuthService } from 'src/app/services/auth.service';
 import { ProductsService } from 'src/app/services/productos.service';
 
 @Component({
@@ -20,44 +20,51 @@ export class NavbarComponent implements OnInit{
     this.open = !this.open;
   }
 
-  constructor( private route: Router, private productService: ProductsService ){}
+  constructor( private route: Router, private productService: ProductsService, private auth: AuthService ){}
 
   searchResults$!: Observable<IProducts[]>;
   filteredProducts: string = '';
-  searchMerchResults$!: Observable<IMerch[]>;
+  searchMerchResults$!: Observable<IProducts[]>;
 
   ngOnInit(): void {
     this.searchResults$ = this.productService.searchResults$;
-    this.searchMerchResults$ = this.productService.searchResultsMerch$;
 
+    if(this.auth.$user()) {
+      this.auth.getUser();
+    }
   }
 
-  searchProducts():void {
+  userNames$ = this.auth.$userName;
 
+
+  searchProducts(): void {
     this.productService.searchProductss(this.filteredProducts);
-    this.productService.searchMerchProducts(this.filteredProducts);
     this.filteredProducts = '';
-
-    this.refreshPage();
   }
 
-  searchResults(): Observable<( IProducts[] | IMerch[] )> {
+  searchResults(): Observable<( IProducts[] )> {
     return forkJoin([
       this.searchResults$,
-      this.searchMerchResults$,
-
     ]).pipe(
-      map(([products, merch]) => [...products, ...merch])
+      map(([searchResults]) => searchResults)
       )
     }
-
 
     // por cada busqueda recargo pagina
     refreshPage(): void {
       this.route.navigateByUrl('/', {skipLocationChange: true}).then(() => {
         this.route.navigate([this.route.url])
-    })
-  }
+      })
+    }
+
+    logout(){
+      this.auth.logout();
+      localStorage.removeItem('user');
+      this.route.navigate(['/']);
+    }
+
+    isAuthenticated(): boolean {
+      return this.auth.$user();
+    }
+
 }
-
-

@@ -1,13 +1,12 @@
 <footer class="bg-white dark:bg-gray-700">
-  <div class="footer-changes flex items-center justify-center relative footer-changes">
-    <div class=" flex items-center w-full py-2 px-2 max-w-screen-md mx-auto flex-col">
-      <h1 class="flex-1 text-center text-xl md:text-2xl lg:text-3xl">REGISTER TO ACCESS ALL THE MONTH'S BENEFITS.</h1>
-      <button class="btn btn-outline-secondary text-lg uppercase style-button ml-2 md:ml-4 lg:ml-6">REGISTER →</button>
+  <ng-container *ngIf="!isAutenticated()">
+    <div class="footer-changes flex items-center justify-center relative footer-changes">
+      <div class=" flex items-center w-full py-2 px-2 max-w-screen-md mx-auto flex-col">
+        <h1 class="flex-1 text-center text-xl md:text-2xl lg:text-3xl">REGISTER TO ACCESS ALL THE MONTH'S BENEFITS.</h1>
+        <button routerLink="/auth/register" class="btn btn-outline-secondary text-lg uppercase style-button ml-2 md:ml-4 lg:ml-6">REGISTER →</button>
+      </div>
     </div>
-  </div>
-
-
-
+  </ng-container>
 
   <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
       <div class="md:flex md:justify-between">
@@ -43,7 +42,7 @@
     </div>
     <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
     <div class="sm:flex sm:items-center sm:justify-between">
-        <span class="text-sm text-gray-500 sm:text-center dark:text-gray-200">© 2024 <a href="#" class="hover:underline">HORUS™</a>. All Rights Reserved.
+        <span class="text-sm text-gray-500 sm:text-center dark:text-gray-200">© 2025 <a href="#" class="hover:underline">HORUS™</a>. All Rights Reserved.
         </span>
         <div class="flex mt-4 sm:justify-center sm:mt-0">
             <a href="https://github.com/pablosnhz" class="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5">

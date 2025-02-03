@@ -21,7 +21,7 @@ export class ShoppingCartComponent implements OnInit{
   ngOnInit(){
     this.productsService.products
     .subscribe(products => {
-      this.products = products
+      this.products = products;
 
     this.suma();
     })

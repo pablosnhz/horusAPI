@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { takeUntil } from 'rxjs';
 import { IProducts } from 'src/app/interface/products';
+import { AuthService } from 'src/app/services/auth.service';
 import { ProductsService } from 'src/app/services/productos.service';
 import { AutoDestroyService } from 'src/app/services/utils/auto-destroy.service';
 
@@ -17,7 +18,7 @@ export class ProductsComponent implements OnInit{
     this.products();
   }
 
-  constructor(private productsService: ProductsService, private route: Router ) { }
+  constructor(private productsService: ProductsService, private route: Router, private auth: AuthService ) { }
 
   isLoading = true;
   listaProductos: IProducts[] = [];
@@ -33,7 +34,11 @@ export class ProductsComponent implements OnInit{
   }
 
   addCart(productos: IProducts) {
-    this.productsService.addProducts(productos, 0);
+    if(this.auth.$user()) {
+      this.productsService.addProducts(productos, 0);
+    } else {
+      this.route.navigate(['auth/login']);
+    }
   }
 
   detailProduct(productId: number){

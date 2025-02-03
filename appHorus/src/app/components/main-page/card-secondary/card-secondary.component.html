@@ -8,10 +8,10 @@
     </button>
     <div class="w-full h-full mx-auto overflow-x-hidden overflow-y-hidden">
     <swiper-container slides-per-view="1" speed="500" loop="true"  id="slider" class="h-full flex lg:gap-8 md:gap-6 gap-14 items-center justify-start transition ease-out duration-700 swiper-slide">
-        <swiper-slide *ngFor="let merch of merchList" (click)="detailMerch(merch.id)" class="flex flex-shrink-0 relative w-full sm:w-auto card-image">
-          <img [src]="merch.image" alt="black chair and white table" class="object-cover object-center w-full" style="height: 30rem; padding: 80px;" />
+        <swiper-slide *ngFor="let merch of merchList" (click)="detailMerch(merch.productoId)" class="flex flex-shrink-0 relative w-full sm:w-auto card-image">
+          <img [src]="merch.imageUrl" alt="black chair and white table" class="object-cover object-center w-full" style="height: 30rem; padding: 80px;" />
           <div class="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
-            <h2 class="lg:text-xl leading-4 text-base lg:leading-5 text-black">{{ merch.category }}</h2>
+            <h2 class="lg:text-xl leading-4 text-base lg:leading-5 text-black">{{ merch.categoria }}</h2>
             <h3 class="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-black">{{ merch.title }}</h3>
             <div class="absolute bottom-0 pb-6">
               <button class="hover-button" (click)="addCart(merch); $event.stopPropagation()">
@@ -31,12 +31,3 @@
     </button>
   </div>
 </div>
-
-
-
-
-
-
-
-
-

@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MainPageComponent } from './components/main-page/main-page.component';
 import { ShopComponent } from './components/shop/shop.component';
-
+import { nouserGuard } from './core/guards/nouser.guard';
 
 const routes: Routes = [
   {
@@ -11,7 +10,16 @@ const routes: Routes = [
       {
         path: '',
         loadChildren: () => import('./components/shop/shop.module').then((m) => m.ShopsRoutingModule)
-      }
+      },
+    ]
+  },
+  {
+    path: 'auth',
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./components/auth/auth.module').then((m) => m.AuthModule)
+      },
     ]
   },
   {

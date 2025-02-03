@@ -13,12 +13,14 @@ import { CardMainComponent } from './components/main-page/card-main/card-main.co
 import { CardSecondaryComponent } from './components/main-page/card-secondary/card-secondary.component';
 import { ProductsComponent } from './components/shop/products/products.component';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ShoppingCartComponent } from './components/shop/shopping-cart/shopping-cart.component';
 import { DetailsComponent } from './components/shop/details/details.component';
 import { RouterModule } from '@angular/router';
 import { ShopRoutingModule } from './components/shop/shop-routing-routing.module';
 import { AutoDestroyService } from './services/utils/auto-destroy.service';
+import { AuthInterceptor } from './core/interceptors/auth.interceptor';
+import { FilterPipe } from './core/pipes/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -32,8 +34,7 @@ import { AutoDestroyService } from './services/utils/auto-destroy.service';
     ProductsComponent,
     ShoppingCartComponent,
     DetailsComponent,
-
-
+    FilterPipe
   ],
   imports: [
     BrowserModule,
@@ -44,7 +45,13 @@ import { AutoDestroyService } from './services/utils/auto-destroy.service';
 
     HttpClientModule
   ],
-  providers: [ AutoDestroyService ],
+  providers: [ AutoDestroyService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+   ],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

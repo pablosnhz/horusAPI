@@ -105,7 +105,7 @@ p, h1, h2 {
   content: "";
   position: absolute;
   top: 0;
-  left: 50%;
+  left: 49.3%;
   transform: translateX(-50%);
   width: 100vw;
   height: 100%;
